@@ -76,9 +76,9 @@ export default function App() {
         <p className="acc">FT–013</p>
         <h1>Elsewho</h1>
         <p className="lede">
-          Paste a name. Optional handle. Optional face. Receive six print-process
-          cards from universes that almost hired you, dated you, taxed you, or
-          incorporated you.
+          Paste a name. Optional handle. Optional face. Receive eight print-process
+          cards from universes that almost hired you, dated you, taxed you,
+          rolled for you, or incorporated you.
         </p>
       </header>
 

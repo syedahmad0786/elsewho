@@ -6,7 +6,9 @@ export type Universe =
   | "dating"
   | "peasant"
   | "obituary"
-  | "startup";
+  | "startup"
+  | "dungeon"
+  | "horoscope";
 
 export type Card = {
   id: Universe;
@@ -35,6 +37,8 @@ const UNIVERSES: Universe[] = [
   "peasant",
   "obituary",
   "startup",
+  "dungeon",
+  "horoscope",
 ];
 
 const PRINT: Record<Universe, Print> = {
@@ -85,6 +89,22 @@ const PRINT: Record<Universe, Print> = {
     stamp: "#7c6ab0",
     grain: 0.05,
     font: "sans",
+  },
+  dungeon: {
+    paper: "#1c2418",
+    ink: "#e8f0c8",
+    rule: "#c4a574",
+    stamp: "#8a9a62",
+    grain: 0.16,
+    font: "mono",
+  },
+  horoscope: {
+    paper: "#2a0830",
+    ink: "#ffe6a8",
+    rule: "#ff4fd8",
+    stamp: "#c9a0ff",
+    grain: 0.08,
+    font: "serif",
   },
 };
 
@@ -204,6 +224,39 @@ const STARTUP_PITCHES = [
   "Infrastructure for the apology you workshopped for three days.",
 ];
 
+const CLASSES = [
+  "Bard of Unsent Drafts",
+  "Rogue (retired, emotionally)",
+  "Cleric of the Group Chat",
+  "Paladin of Leaving On Time",
+  "Wizard who only knows Prestidigitation and Reply-All",
+  "Ranger of the parking garage",
+];
+
+const ALIGNMENTS = [
+  "Chaotic Soft",
+  "Lawful Tired",
+  "Neutral with a snack",
+  "Good, but only after coffee",
+  "True Unbothered",
+];
+
+const SIGNS = [
+  "the Moon in a group chat",
+  "Mercury in 'I'll start Monday'",
+  "Venus in the notes app",
+  "Mars in the last slice",
+  "Saturn in the unread badge",
+];
+
+const FORECASTS = [
+  "A stranger will compliment your coat. Do not explain the coat.",
+  "Avoid people who say synergy. They are not your people, even in this universe.",
+  "The 4pm slump is a portal. Walk through it toward a sandwich.",
+  "Someone will ask what you do. Answer with a weather report.",
+  "Your lucky object is the tab you meant to close in 2019.",
+];
+
 export function generateDeck(nameRaw: string, handleRaw: string): Card[] {
   const name = displayName(nameRaw);
   const handle = handleRaw.replace(/^@/, "").trim();
@@ -303,17 +356,49 @@ function oneCard(
     };
   }
 
-  const co = pickOne(rng, STARTUP_NAMES);
-  const pitch = pickOne(rng, STARTUP_PITCHES);
-  const body = `${name} is the founder of ${co}.\n\n${pitch}\n\nRaised: a round of applause and $40 in Venmo from a cousin.\nMoat: taste.\nExit: walking outside.`;
+  if (id === "startup") {
+    const co = pickOne(rng, STARTUP_NAMES);
+    const pitch = pickOne(rng, STARTUP_PITCHES);
+    const body = `${name} is the founder of ${co}.\n\n${pitch}\n\nRaised: a round of applause and $40 in Venmo from a cousin.\nMoat: taste.\nExit: walking outside.`;
+    return {
+      id,
+      label: "If they were a startup",
+      kicker: "SEED DECK · CONFIDENTIAL-ISH",
+      title: `${co}`,
+      body,
+      footer: handle ? `${at} · pre-product, post-bit` : "pre-product, post-bit",
+      caption: `If ${name} were a startup they would be called ${co}.`,
+      print,
+    };
+  }
+
+  if (id === "dungeon") {
+    const klass = pickOne(rng, CLASSES);
+    const align = pickOne(rng, ALIGNMENTS);
+    const body = `Class: ${klass}\nAlignment: ${align}\nHP: 7 (temporarily 40 when someone asks how they are)\nInventory: a half-written novel, one excellent coat, the group chat mute button.\nQuest: find the other sock and also meaning.`;
+    return {
+      id,
+      label: "Dungeon sheet",
+      kicker: "CHARACTER RECORD · LEVEL 1 ADULT",
+      title: `${name}`,
+      body,
+      footer: "DM notes: do not let them roll for initiative in meetings",
+      caption: `${name}'s character sheet says ${klass}, ${align}.`,
+      print,
+    };
+  }
+
+  const sign = pickOne(rng, SIGNS);
+  const forecast = pickOne(rng, FORECASTS);
+  const body = `Rising: ${sign}.\n\nThis week: ${forecast}\n\nDo not check your ex's story. The stars already did, and they are tired of you.`;
   return {
     id,
-    label: "If they were a startup",
-    kicker: "SEED DECK · CONFIDENTIAL-ISH",
-    title: `${co}`,
+    label: "Tabloid horoscope",
+    kicker: "WEEKLY · FOR ENTERTAINMENT / DOOM",
+    title: `${name}'s stars`,
     body,
-    footer: handle ? `${at} · pre-product, post-bit` : "pre-product, post-bit",
-    caption: `If ${name} were a startup they would be called ${co}.`,
+    footer: handle ? `${at} · void-certified` : "void-certified",
+    caption: `This week's horoscope for ${name} is ${sign}.`,
     print,
   };
 }

@@ -1,6 +1,6 @@
 # Elsewho
 
-Paste a name, optional X handle, optional photo. Receive six print-process cards from parallel universes:
+Paste a name, optional X handle, optional photo. Receive eight print-process cards from parallel universes:
 
 - Alternate LinkedIn
 - Villain origin story
@@ -8,10 +8,12 @@ Paste a name, optional X handle, optional photo. Receive six print-process cards
 - Medieval peasant census
 - Kind-universe obituary
 - If they were a startup
+- Dungeon character sheet
+- Tabloid horoscope
 
 Same seed, same cards. The copy is combinatorial (no model required). Photos never leave the browser.
 
-Live: after deploy. Repo: https://github.com/syedahmad0786/elsewho
+Live: https://elsewho.vercel.app
 
 Shareable URL:
 

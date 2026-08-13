@@ -27,8 +27,8 @@ export async function GET(request: Request): Promise<Response> {
   <rect x="48" y="48" width="1104" height="534" fill="#efe2cc" stroke="#c45c26" stroke-width="10"/>
   <text x="90" y="140" font-family="Georgia, serif" font-size="28" fill="#c45c26" letter-spacing="6">FT-013  ELSEWHO</text>
   <text x="90" y="280" font-family="Georgia, serif" font-size="72" fill="#1b1410">${safe}</text>
-  <text x="90" y="360" font-family="Georgia, serif" font-size="36" font-style="italic" fill="#5c4030">six other lives, printed</text>
-  <text x="90" y="520" font-family="ui-monospace, monospace" font-size="22" fill="#8a7460">LinkedIn · villain · dating · peasant · obituary · startup</text>
+  <text x="90" y="360" font-family="Georgia, serif" font-size="36" font-style="italic" fill="#5c4030">eight other lives, printed</text>
+  <text x="90" y="520" font-family="ui-monospace, monospace" font-size="18" fill="#8a7460">LinkedIn · villain · dating · peasant · obituary · startup · dungeon · stars</text>
   <circle cx="1020" cy="180" r="48" fill="#c45c26" opacity="${0.4 + (hue % 10) / 20}"/>
 </svg>`;
   return new Response(svg, {

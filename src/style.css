@@ -145,6 +145,15 @@ h1 {
 .plate-startup {
   background: linear-gradient(145deg, #1a1440, #0f1020);
 }
+.plate-dungeon {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  background-image: radial-gradient(#2a3420 1px, transparent 1px);
+  background-size: 12px 12px;
+}
+.plate-horoscope {
+  border-width: 10px;
+  box-shadow: 0 0 0 4px #ff4fd8, 0 24px 60px #0008;
+}
 
 .kicker {
   font-family: "IBM Plex Mono", monospace;
@@ -207,6 +216,8 @@ h1 {
 .face[data-print="peasant"] { filter: sepia(0.85) contrast(1.05); }
 .face[data-print="villain"] { filter: grayscale(0.7) contrast(1.2); }
 .face[data-print="obituary"] { filter: grayscale(1); }
+.face[data-print="dungeon"] { filter: sepia(0.4) contrast(1.15) hue-rotate(40deg); }
+.face[data-print="horoscope"] { filter: contrast(1.2) saturate(1.4) hue-rotate(-20deg); }
 
 .acts {
   display: flex;

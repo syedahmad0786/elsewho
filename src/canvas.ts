@@ -130,6 +130,8 @@ export async function paintCard(
     if (card.id === "villain") g.filter = "grayscale(0.7) contrast(1.2)";
     if (card.id === "obituary") g.filter = "grayscale(1) contrast(1.05)";
     if (card.id === "startup") g.filter = "saturate(0.6) contrast(1.1)";
+    if (card.id === "dungeon") g.filter = "sepia(0.4) contrast(1.15) hue-rotate(40deg)";
+    if (card.id === "horoscope") g.filter = "contrast(1.2) saturate(1.4) hue-rotate(-20deg)";
     drawCover(g, photo, x, y, size, size);
     g.restore();
     g.strokeStyle = print.rule;
