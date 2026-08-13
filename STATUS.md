@@ -1,5 +1,10 @@
 # elsewho — STATUS
 
+## 2026-08-13 — eight universes live
+
+- Dungeon sheet + tabloid horoscope are on https://elsewho.vercel.app
+- Next: optional Anthropic weirder pass if a Vercel key is added.
+
 ## 2026-08-13 — eight universes
 
 - Added dungeon character sheet and tabloid horoscope. Cards are now eight, not six.
