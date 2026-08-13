@@ -1,0 +1,258 @@
+:root {
+  --bg: #1b1410;
+  --paper: #efe2cc;
+  --ink: #1b1410;
+  --mute: #8a7460;
+  --rule: #c45c26;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  background:
+    radial-gradient(1200px 600px at 10% -10%, #3a2418 0%, transparent 50%),
+    var(--bg);
+  color: var(--paper);
+  font-family: Figtree, ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  padding: 2.5rem 1.25rem 5rem;
+}
+
+#root {
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.mast .acc {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  color: var(--rule);
+  margin: 0 0 0.4rem;
+}
+
+h1 {
+  font-family: Fraunces, Georgia, serif;
+  font-weight: 600;
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  letter-spacing: -0.03em;
+  margin: 0;
+  font-variation-settings: "SOFT" 40, "WONK" 1;
+}
+
+.lede {
+  max-width: 38rem;
+  color: #d8c4aa;
+  line-height: 1.5;
+  font-size: 1.05rem;
+}
+
+.intake {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr auto auto;
+  gap: 0.75rem;
+  align-items: end;
+  margin: 2rem 0 2.5rem;
+}
+
+.intake label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+
+.intake input[type="text"],
+.intake input:not([type="file"]) {
+  background: #2a2018;
+  border: 1px solid #4a382c;
+  color: var(--paper);
+  padding: 0.75rem 0.8rem;
+  font: 500 1rem Figtree, sans-serif;
+}
+
+.intake input[type="file"] {
+  font-size: 0.75rem;
+  color: var(--mute);
+  max-width: 11rem;
+}
+
+.intake button,
+.acts button {
+  background: var(--rule);
+  color: #fff8f0;
+  border: 0;
+  padding: 0.85rem 1.1rem;
+  font: 600 0.95rem Figtree, sans-serif;
+  cursor: pointer;
+}
+
+.acts button.ghost {
+  background: transparent;
+  color: var(--paper);
+  border: 1px solid #4a382c;
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.tabs button {
+  background: transparent;
+  border: 1px solid #4a382c;
+  color: #d8c4aa;
+  padding: 0.45rem 0.7rem;
+  font: 500 0.8rem Figtree, sans-serif;
+  cursor: pointer;
+}
+
+.tabs button.on {
+  background: var(--paper);
+  color: var(--ink);
+  border-color: var(--paper);
+}
+
+.plate {
+  position: relative;
+  background: var(--paper);
+  color: var(--ink);
+  padding: 2.2rem 2.4rem 2rem;
+  min-height: 28rem;
+  border: 8px solid var(--rule);
+  box-shadow: 0 24px 60px #0008;
+}
+
+.plate-villain { border-width: 12px 8px 8px; }
+.plate-obituary { border-width: 3px; font-family: Fraunces, serif; }
+.plate-peasant {
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 47px,
+    color-mix(in srgb, var(--stamp) 35%, transparent) 48px
+  );
+}
+.plate-startup {
+  background: linear-gradient(145deg, #1a1440, #0f1020);
+}
+
+.kicker {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  color: var(--stamp);
+  margin: 0 0 0.8rem;
+}
+
+.plate h2 {
+  font-family: Fraunces, Georgia, serif;
+  font-weight: 600;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  white-space: pre-line;
+  margin: 0 8rem 1rem 0;
+  line-height: 1.15;
+}
+
+.plate-linkedin h2,
+.plate-startup h2 {
+  font-family: Figtree, sans-serif;
+  font-weight: 750;
+}
+
+.body {
+  font: italic 1.12rem/1.55 Fraunces, Georgia, serif;
+  white-space: pre-wrap;
+  margin: 0;
+  max-width: 40rem;
+}
+
+.plate-linkedin .body,
+.plate-startup .body {
+  font-style: normal;
+  font-family: Figtree, sans-serif;
+}
+
+.foot {
+  margin: 2rem 0 0;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.75rem;
+  color: var(--stamp);
+}
+
+.face {
+  position: absolute;
+  top: 2.4rem;
+  right: 2.2rem;
+  width: 7.2rem;
+  height: 7.2rem;
+  object-fit: cover;
+  border: 2px solid var(--rule);
+}
+
+.face[data-print="linkedin"],
+.face[data-print="dating"] {
+  border-radius: 50%;
+}
+
+.face[data-print="peasant"] { filter: sepia(0.85) contrast(1.05); }
+.face[data-print="villain"] { filter: grayscale(0.7) contrast(1.2); }
+.face[data-print="obituary"] { filter: grayscale(1); }
+
+.acts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.status {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.75rem;
+  color: #e8c39a;
+}
+
+.privacy,
+.empty {
+  color: var(--mute);
+  font-size: 0.9rem;
+}
+
+.webring {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  gap: 0.7rem;
+  justify-content: center;
+  padding: 0.7rem;
+  background: #140f0c;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.75rem;
+}
+
+.webring a {
+  color: #d8c4aa;
+  text-decoration: none;
+}
+
+.webring a:hover { color: #fff; }
+.dot { color: #6a5646; }
+
+@media (max-width: 800px) {
+  .intake { grid-template-columns: 1fr 1fr; }
+  .intake button { grid-column: 1 / -1; }
+  .plate h2 { margin-right: 0; }
+  .face { width: 4.5rem; height: 4.5rem; }
+}
