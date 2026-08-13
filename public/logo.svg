@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="ewh">
+  <defs>
+    <filter id="ewh-soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="0.6" result="b"/>
+      <feOffset dy="0.4"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="64" height="64" rx="6" fill="#1b1410"/>
+     <rect x="8" y="10" width="48" height="44" fill="#efe2cc" stroke="#c45c26" stroke-width="3"/>
+     <path fill="#1b1410" d="M24 40c0-6 3.4-9 8-9s8 3 8 9H24z"/>
+     <circle cx="28.2" cy="26" r="4.2" fill="#1b1410"/>
+     <circle cx="37.4" cy="26" r="4.2" fill="#c45c26"/>
+     <path fill="#c45c26" d="M36 40c.4-5 3-8 7.2-8 1.6 0 3 .5 4 1.4C44.6 37.4 41 40 36 40z"/>
+</svg>

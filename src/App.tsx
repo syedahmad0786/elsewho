@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState, type CSSProperties } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { downloadPng, paintCard } from "./canvas";
 import { generateDeck, type Universe } from "./copy";
 import { displayName, readQuery, slugify } from "./seed";
@@ -10,6 +11,8 @@ export default function App() {
   const [photo, setPhoto] = useState<HTMLImageElement | null>(null);
   const [active, setActive] = useState<Universe>("linkedin");
   const [status, setStatus] = useState("");
+  const plateRef = useRef<HTMLElement>(null);
+  const reduce = useReducedMotion();
 
   const deck = useMemo(() => {
     if (!name.trim()) return [];
@@ -40,6 +43,8 @@ export default function App() {
     else url.searchParams.delete("h");
     window.history.replaceState({}, "", url);
   }, [name, handle]);
+
+  useEffect(() => bindPlateTilt(plateRef.current), [card?.id]);
 
   const onPhoto = (file: File | undefined) => {
     if (!file) {
@@ -73,13 +78,16 @@ export default function App() {
   return (
     <>
       <header className="mast">
-        <p className="acc">FT–013</p>
-        <h1>Elsewho</h1>
-        <p className="lede">
-          Paste a name. Optional handle. Optional face. Receive eight print-process
-          cards from universes that almost hired you, dated you, taxed you,
-          rolled for you, or incorporated you.
-        </p>
+        <img className="mark" src="/logo.svg" alt="" width={56} height={56} />
+        <div className="mast-copy">
+          <p className="acc">FT–013</p>
+          <h1>Elsewho</h1>
+          <p className="lede">
+            Paste a name. Optional handle. Optional face. Receive eight print-process
+            cards from universes that almost hired you, dated you, taxed you,
+            rolled for you, or incorporated you.
+          </p>
+        </div>
       </header>
 
       <form
@@ -137,30 +145,39 @@ export default function App() {
               </button>
             ))}
           </nav>
-          <article
-            className={`plate plate-${card.id}`}
-            style={
-              {
-                "--paper": card.print.paper,
-                "--ink": card.print.ink,
-                "--rule": card.print.rule,
-                "--stamp": card.print.stamp,
-              } as CSSProperties
-            }
+          <motion.div
+            key={card.id}
+            className="plate-rig"
+            initial={reduce ? false : { opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
           >
-            <p className="kicker">{card.kicker}</p>
-            <h2>{card.title}</h2>
-            {photo ? (
-              <img
-                className="face"
-                src={photo.src}
-                alt=""
-                data-print={card.id}
-              />
-            ) : null}
-            <pre className="body">{card.body}</pre>
-            <p className="foot">{card.footer}</p>
-          </article>
+            <article
+              ref={plateRef}
+              className={`plate plate-${card.id}`}
+              style={
+                {
+                  "--paper": card.print.paper,
+                  "--ink": card.print.ink,
+                  "--rule": card.print.rule,
+                  "--stamp": card.print.stamp,
+                } as CSSProperties
+              }
+            >
+              <p className="kicker">{card.kicker}</p>
+              <h2>{card.title}</h2>
+              {photo ? (
+                <img
+                  className="face"
+                  src={photo.src}
+                  alt=""
+                  data-print={card.id}
+                />
+              ) : null}
+              <pre className="body">{card.body}</pre>
+              <p className="foot">{card.footer}</p>
+            </article>
+          </motion.div>
           <div className="acts">
             <button type="button" onClick={save}>
               Save PNG
@@ -194,3 +211,27 @@ export default function App() {
   );
 }
 
+function bindPlateTilt(el: HTMLElement | null): () => void {
+  if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    return () => {};
+  }
+  const onMove = (e: PointerEvent) => {
+    const r = el.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width - 0.5;
+    const py = (e.clientY - r.top) / r.height - 0.5;
+    el.style.setProperty("--rx", `${(-py * 8).toFixed(2)}deg`);
+    el.style.setProperty("--ry", `${(px * 10).toFixed(2)}deg`);
+    el.style.setProperty("--z", "18px");
+  };
+  const onLeave = () => {
+    el.style.setProperty("--rx", "0deg");
+    el.style.setProperty("--ry", "0deg");
+    el.style.setProperty("--z", "0px");
+  };
+  el.addEventListener("pointermove", onMove);
+  el.addEventListener("pointerleave", onLeave);
+  return () => {
+    el.removeEventListener("pointermove", onMove);
+    el.removeEventListener("pointerleave", onLeave);
+  };
+}
